@@ -117,12 +117,12 @@ class IconPlugin(BlockingPlugin):
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'Accept-Language': 'en-US,en;q=0.5',
         'User-Agent': 'Mozilla/5.0 (Mobile; rv:25.0) Gecko/25.0 Firefox/25.0',
-        'Accept-Encoding': 'gzip, deflate',
+        #'Accept-Encoding': 'gzip, deflate',
     }
 
     def do_run(self):
 
-        r = minion.curly.get(self.configuration['target'], connect_timeout=5, timeout=15) # , headers=self.DEFAULT_HEADERS)
+        r = minion.curly.get(self.configuration['target'], connect_timeout=5, timeout=15, headers=self.DEFAULT_HEADERS)
         r.raise_for_status()
 
         icons = parse_icons_from_html(r.body)
